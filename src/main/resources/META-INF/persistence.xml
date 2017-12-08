@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+	<!--Nome do contexto que configura o Provedor de Persistencia -->
+	<persistence-unit name="AtendimentoPU">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<!--String Conexao com o banco de dados -->
+			<property name="hibernate.connection.url" value ="jdbc:mysql://localhost:3306/atendimentos"/>
+			<!--Dialeto entendido pelo banco -->
+			<property name="hibernate.dialect"  value = "org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<!--Driver JDBC para acesso ao banco -->
+			<property name="hibernate.connection.driver_class" value = "com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.username" value="root"/>
+			<property name="hibernate.connection.password" value ="root"/>
+			<!--Metodo de atualizacao -->
+			<property name="hibernate.hbm2ddl.auto" value = "update"/>
+			<property name="hibernate.show_sql"  value = "true"/>
+		</properties>
+	</persistence-unit>
+</persistence>

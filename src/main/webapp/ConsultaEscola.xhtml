@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+<h:head>
+	<title>Consulta de Escolas</title>
+	<h:outputStylesheet library="atendimento" name="estilo.css" />
+</h:head>
+<h:body>
+
+	<f:metadata>
+
+		<f:viewAction action="#{consultaEscolasBean.consultar}" />
+	</f:metadata>
+	<header>
+		<h:graphicImage library="atendimento" name="logo.png" />
+
+	</header>
+	<div id="conteudo">
+
+
+		<h:form id="frm">
+			<p:menubar style="margin-top: -30px; margin-bottom: 20px">
+				<p:menuitem icon="ui-icon-home" value="Home"
+					action="/Index?faces-redirect=true" />
+				<p:submenu icon="ui-icon-plus" label="Cadastros">
+					<p:menuitem icon="ui-icon-home" value="Escola"
+						action="/CadastroEscola?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-person" value="Atendente"
+						action="/CadastroAtendente?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-pin-s" value="Pendencia"
+						action="/CadastroPendencia?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-document" value="Atendimento "
+						action="/CadastroHisAtendimento?faces-redirect=true" />
+				</p:submenu>
+				<p:submenu icon="ui-icon-circle-zoomout" label="Consultas">
+					<p:menuitem icon="ui-icon-home" value="Escola"
+						action="/ConsultaEscola?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-person" value="Atendente"
+						action="/ConsultaAtendente?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-pin-s" value="Pendencia"
+						action="/ConsultaPendencias?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-document" value="Atendimento"
+						action="/ConsultaHisAtendimento?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-pin-s" value="Escola/Pendencia"
+						action="/EscolaPendencia?faces-redirect=true" />
+				</p:submenu>
+
+				<p:submenu label="Usuários" icon="ui-icon-person">
+					<p:menuitem icon="ui-icon-person" value="Cadastro Usuários"
+						action="/CadastroUsuario?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-zoomin" value="Consulta Usuários"
+						action="/ConsultaUsuario?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-shuffle" value="Cadastro Permissões"
+						action="/CadastroPermissao?faces-redirect=true" />
+					<p:menuitem icon="ui-icon-zoomin	" value="Consulta Permissões"
+						action="/ConsultaPermissao?faces-redirect=true" />
+				</p:submenu>
+				<p:submenu label="Sistema">
+					<p:menuitem icon="ui-icon-close	" value="Sair" />
+				</p:submenu>
+			</p:menubar>
+			<h1>Consulta de Escolas</h1>
+
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+
+			<p:dataTable value="#{consultaEscolasBean.escolas}" var="escola"
+				border="1" cellspacing="0" cellpadding="2" paginator="true"
+				rows="10" lazy="true">
+				<p:column headerText="Nome" sortBy="#{escola.nome}">
+					<h:outputText value="#{escola.nome}" />
+				</p:column>
+				<p:column headerText="Codigo" sortBy="#{escola.codigo}">
+					<h:outputText value="#{escola.codigo}" />
+				</p:column>
+
+				<p:column headerText="Cidade" sortBy="#{escola.cidade}">
+					<h:outputText value="#{escola.cidade}" />
+				</p:column>
+
+
+				<p:column headerText="Endereço">
+					<h:outputText value="#{escola.endereco}" />
+				</p:column>
+				<p:column headerText="telefone">
+					<h:outputText value="#{escola.telefone}" />
+				</p:column>
+
+				<p:column headerText="Diretor Unidade">
+					<h:outputText value="#{escola.diretorUnidade}" />
+				</p:column>
+
+				<p:column headerText="Coordenador Pedagogico">
+					<h:outputText value="#{escola.coordenadorPedagogico}" />
+				</p:column>
+
+				<p:column headerText="Diretor Academico">
+					<h:outputText value="#{escola.diretorAcademico}" />
+				</p:column>
+
+				<p:column headerText="Diretor Administrativo">
+					<h:outputText value="#{escola.diretorAdministrativo}" />
+				</p:column>
+
+				<p:column headerText="Orientador Educacional">
+					<h:outputText value="#{escola.orientadorEducacional}" />
+				</p:column>
+
+
+				<p:column>
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/CadastroEscola">
+						<f:param name="id" value="#{escola.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						process="@this" update="@form"
+						action="#{consultaEscolasBean.excluir}">
+						<f:setPropertyActionListener value="#{escola}"
+							target="#{consultaEscolasBean.escolaSelecionado}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</div>
+	<footer> Sistema de Atendimento - Centro Paula Souza </footer>
+</h:body>
+</html>
